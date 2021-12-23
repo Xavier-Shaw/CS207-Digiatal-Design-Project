@@ -44,7 +44,7 @@ reg [5:0] cnt_code = 0;//缓冲区编码长度
 
 reg [2:0] codes_length = 0; //解码后的字符含有的长短码个数
 reg [5:0] index = 0; //解码时对应缓冲区位置的指针
-reg decode_complete;
+reg decode_complete;  ////解码是否正常
 
 //按键防抖
 reg[3:0] reg_long_key = 0;
@@ -55,9 +55,11 @@ reg[3:0] reg_reset = 0;
 
 always@(posedge check)
 begin  
+    //////报错灯显示时长
     if(error_decode)
         #10000_000 error_decode = 0;
     
+    ///////对每个按键进行防抖处理，当一个按键确定按下后，清空其它按键的 reg
     if(long_key) 
     begin
         if(reg_long_key[3] != 1)
@@ -84,7 +86,8 @@ begin
         reg_reset = reg_reset + 1;
     end
    
-    ////////   长码
+   
+    ////////   长码输入
     if(reg_long_key[3])
     begin
         if(cnt_code <= 13)
@@ -105,7 +108,7 @@ begin
         reg_back_space = 0;
         reg_send = 0;
     end
-    ////////   短码
+    ////////   短码输入
     else if(reg_short_key[3])
     begin
         if(cnt_code <= 14)
@@ -122,40 +125,40 @@ begin
         reg_send = 0;
         reg_reset = 0;
     end
-    ////////   退格
+    ////////   退格功能  根据要删除的长短码的不同 进行操作
     else if(reg_back_space[3])
     begin             
         if(cnt_code == 15)
         begin
             error_out_of_length = 0;
-            if(Y_led[14] && Y_led[13]) //011
+            if(Y_led[14] && Y_led[13]) 
             begin
                 Y_led[14] = 0;
                 Y_led[13] = 0;
                 cnt_code = 13;
             end
-            else if(Y_led[14] && ~Y_led[13]) // 101 
+            else if(Y_led[14] && ~Y_led[13])  
             begin
                 Y_led[14] = 0;
                 cnt_code = 14;
             end
-            else if(~Y_led[14] && Y_led[13] && Y_led[12]) // 110
+            else if(~Y_led[14] && Y_led[13] && Y_led[12]) 
             begin
                 Y_led[13] = 0;
                 Y_led[12] = 0;
                 cnt_code = 12;
             end
-            else if(~Y_led[14] && Y_led[13] && ~Y_led[12]) // 010
+            else if(~Y_led[14] && Y_led[13] && ~Y_led[12]) 
             begin
                 Y_led[13] = 0;
                 cnt_code = 13;
             end
-            else if(~Y_led[14] && ~Y_led[13] && Y_led[12] && ~Y_led[11]) //0100
+            else if(~Y_led[14] && ~Y_led[13] && Y_led[12] && ~Y_led[11]) 
             begin
                 Y_led[12] = 0;
                 cnt_code = 12;
             end
-            else if(~Y_led[14] && ~Y_led[13] && Y_led[12] && Y_led[11]) //1100
+            else if(~Y_led[14] && ~Y_led[13] && Y_led[12] && Y_led[11]) 
             begin
                 Y_led[12] = 0;
                 Y_led[11] = 0;
@@ -184,13 +187,13 @@ begin
         reg_send = 0;  
         reg_reset = 0;          
     end
-    ///////    发送
+    ////////    发送功能
     else if(reg_send[3])
     begin
         codes_length = 0;
         index = 0;
         decode_complete = 1;
-        //发送成功，进行解码
+        /////发送成功，进行解码
         if(cnt_character <= 7)                             ////// 假设缓冲区为： 110_10_110_10 则解码信息为：10100
         begin                        
             repeat(6) //读完了缓冲区 则停止循环
@@ -306,7 +309,7 @@ begin
                 {characters_code[5 * (cnt_character + 1) - 3], characters_code[5 * (cnt_character + 1) - 4], characters_code[5 * (cnt_character + 1) - 5]} = 3'b000;
                 end
             endcase            
-            //解码完成后，恢复初始状态
+           ////解码完成后，恢复初始状态
             index = 0;
             codes_length = 0;
             if(cnt_character == 8)
@@ -315,7 +318,7 @@ begin
         else
         error_character = 1;
         
-        //清空缓存区，恢复初始状态
+        ////清空缓存区，恢复初始状态
         Y_led = 0;
         cnt_code = 0;
         error_out_of_length = 0;
@@ -329,12 +332,12 @@ begin
     /////////重置
     else if(reg_reset[3])
     begin
-        //清空长短码缓冲区的信息
+        ////清空长短码缓冲区的信息
         cnt_code = 0;
         Y_led = 0;
         error_out_of_length = 0;
 
-        //清空七段数码管的信息
+        ////清空七段数码管的信息
         error_character = 0;
         characters_code = 0;
         cnt_character_code = 0;
@@ -357,6 +360,7 @@ begin
     cnt_code = 15;
     error_out_of_length = 1;
     end   
+    
 end
 
 
