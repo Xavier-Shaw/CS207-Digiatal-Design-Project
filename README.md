@@ -1,5 +1,6 @@
 # CS207-Digital-Design-Project
-Implementation of a Morse Code encoder and decoder with beep
+
+Concept: A implementation of a Mos Code encoder and decoder with buzzer
 
 Group Member: Xavier, Siri, Hhh
 
@@ -12,7 +13,7 @@ Welcome Mode:
 - Displays "SUSTech", "CS207"
 - Displays the Student Ids of group members
 - Displays a flowing light of "HELLO"
-- Plays a song by beeping 
+- Plays a song by buzzer 
 
 
 Decode Mode:
@@ -27,4 +28,4 @@ Encode Mode:
 - Allows user to input characters by tapping keyboard
 - Have backspace, reset and etc. functions
 - Displays the characters on the seg tube
-- Displays the character's Mos Code by beeping
+- Displays the character's Mos Code by buzzer
