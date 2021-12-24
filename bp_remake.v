@@ -20,15 +20,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module bp_remake(
-input[135:0]message,
-input send,
-input enMarry,
-input speedslow,
-input speedquick,
-input clk,
-output reg[0:0] music = 0);
-
+module bp_remake(input[135:0]message,input send,input enMarry,input speedslow,input speedquick,input clk,output reg[0:0] music = 0);
   reg[1:0] mode=2'b11;//确定参数重置
   reg[1:0] last_mode = 0;//不等于mode时，参数重置，重置后等于mode，不再进行参数重置
   reg[7:0] melody_length = 136;//读取的长短码的长度
@@ -110,17 +102,11 @@ output reg[0:0] music = 0);
       if(mode != last_mode)//用于参数重置
       begin
         last_mode = mode;
-        isEnd = 0;
+      
         index = 0;
-        index_count = 0;
-
-        if(mode >= 3)//处于周期，可以播放音乐
-          isPeriodic = 1;
-        else
-        begin
-          isPeriodic = 0;//不播放音乐
-          melody_length = 1;
-        end
+        index_count = 0;       
+        isPeriodic = 1;//处于周期，可以播放音乐
+       
       end
       if(frequency_count >= freq)//声音播放
       begin
@@ -141,16 +127,12 @@ output reg[0:0] music = 0);
       begin
         index_count = 0;
         index = index + 1;
-        if(index > melody_length && isPeriodic)//整串读完，还处于播放阶段，循环播放
+        if(index > melody_length)//整串读完，归零，循环播放
         begin
-          isEnd = 0;
+         
           index = 0;
         end
-        if(index > melody_length && !isPeriodic)//整串读完，不处于播放阶段，暂定播放
-        begin
-          index = 0;
-          isEnd = 1;
-        end
+        
       end
 
       index_count = index_count + 1;
@@ -162,7 +144,7 @@ output reg[0:0] music = 0);
   end
   always @ *
   begin
-    if(isSilence || isEnd)
+    if(isSilence )
       freq = silence;
     else if(enMarry)
     begin
