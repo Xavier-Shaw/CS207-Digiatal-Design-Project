@@ -1,6 +1,6 @@
 # CS207-Digital-Design-Project
 
-Concept: A implementation of a Mos Code encoder and decoder with buzzer
+Concept: A implementation of a Morse Code encoder and decoder with buzzer
 
 Group Member: Xavier, Siri, Hhh
 
@@ -17,10 +17,10 @@ Welcome Mode:
 
 
 Decode Mode:
-- Contains a buffer area to store the Mos Code 
-- Allow user to input Mos Code by tapping buttons
+- Contains a buffer area to store the Morse Code 
+- Allow user to input Morse Code by tapping buttons
 - Have backspace, reset and etc. functions 
-- Translates the Mos Code in the buffer area into character and displays the characters on the seg tube
+- Translates the Morse Code in the buffer area into character and displays the characters on the seg tube
 - Have multiple error warning hints by LED
 
 
@@ -28,4 +28,4 @@ Encode Mode:
 - Allows user to input characters by tapping keyboard
 - Have backspace, reset and etc. functions
 - Displays the characters on the seg tube
-- Displays the character's Mos Code by buzzer
+- Displays the character's Morse Code by buzzer
