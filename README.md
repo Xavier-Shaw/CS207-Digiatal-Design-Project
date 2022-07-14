@@ -2,7 +2,7 @@
 
 Concept: A implementation of a Morse Code encoder and decoder with buzzer
 
-Group Member: Xavier, Siri, Hhh
+Group Member: Yuwei Xiao, Sirui Li, Huihui Huang
 
 
 Modes: 
