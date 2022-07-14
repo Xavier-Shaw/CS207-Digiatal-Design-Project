@@ -8,12 +8,12 @@ Yuwei Xiao, Sirui Li, Huihui Huang
 
 ## Modes
 Welcome Mode, Decode Mode, Encode Mode
-
-* Welcome Mode:
-- Displays "SUSTech", "CS207"
-- Displays the Student Ids of group members
-- Displays a flowing light of "HELLO"
-- Plays a song by buzzer 
+---
+* Welcome Mode:  
+  Displays "SUSTech", "CS207"  
+  Displays the Student Ids of group members
+  Displays a flowing light of "HELLO"  
+  Plays a song by buzzer 
 
 
 * Decode Mode:
