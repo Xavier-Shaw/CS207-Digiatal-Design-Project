@@ -16,16 +16,16 @@ Welcome Mode, Decode Mode, Encode Mode
   Plays a song by buzzer 
 
 
-* Decode Mode:
-- Contains a buffer area to store the Morse Code 
-- Allow user to input Morse Code by tapping buttons
-- Have backspace, reset and etc. functions 
-- Translates the Morse Code in the buffer area into character and displays the characters on the seg tube
-- Have multiple error warning hints by LED
+* Decode Mode:  
+  Contains a buffer area to store the Morse Code 
+  Allow user to input Morse Code by tapping buttons
+  Have backspace, reset and etc. functions 
+  Translates the Morse Code in the buffer area into character and displays the characters on the seg tube
+  Have multiple error warning hints by LED
 
 
 * Encode Mode:
-- Allows user to input characters by tapping keyboard
-- Have backspace, reset and etc. functions
-- Displays the characters on the seg tube
-- Displays the character's Morse Code by buzzer
+  Allows user to input characters by tapping keyboard
+  Have backspace, reset and etc. functions
+  Displays the characters on the seg tube
+  Displays the character's Morse Code by buzzer
